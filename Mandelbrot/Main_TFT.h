@@ -24,7 +24,7 @@ void loop() { // Main loop is empty because Mandelbrot is only drawn once.
 void drawMandelbrot() {
   for(int x=0; x < 160; x++) {
     for(int y=0; y < 80; y++) {
-      double zx = (x - 80.0) / 40.0;  // Adjust these values for zoom and positioning
+      double zx = (x - 120.0) / 40.0;  // Adjust these values for zoom and positioning
       double zy = (y - 40.0) / 40.0;  // Adjust these values for zoom and positioning
       double cx = zx;
       double cy = zy;
