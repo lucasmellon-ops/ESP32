@@ -1,12 +1,13 @@
 #include <WiFi.h>
-#include <WebServer.h>
+#include <AsyncTCP.h>
+#include <ESPAsyncWebServer.h>
 #include <FastLED.h>
 
 // Replace with your network credentials
 const char* ssid     = "your_SSID";
 const char* password = "your_PASSWORD";
 
-WebServer server(80);
+AsyncWebServer server(80);
 
 // Define LED pins and configuration
 #define NUM_LEDS 1
@@ -28,17 +29,17 @@ void setup() {
     Serial.println("Connected to WiFi");
 
     // Route to turn on LED
-    server.on("/on", HTTP_GET, []() {
+    server.on("/on", HTTP_GET, [](AsyncWebServerRequest *request) {
         leds[0] = CRGB::White; // You can change the color to your preference
         FastLED.show();
-        server.send(200, "text/plain", "LED is ON");
+        request->send(200, "text/plain", "LED is ON");
     });
 
     // Route to turn off LED
-    server.on("/off", HTTP_GET, []() {
+    server.on("/off", HTTP_GET, [](AsyncWebServerRequest *request) {
         leds[0] = CRGB::Black;
         FastLED.show();
-        server.send(200, "text/plain", "LED is OFF");
+        request->send(200, "text/plain", "LED is OFF");
     });
 
     // Start server
@@ -46,5 +47,5 @@ void setup() {
 }
 
 void loop() {
-    server.handleClient();
+    // The async web server doesn't need anything in the loop!
 }
