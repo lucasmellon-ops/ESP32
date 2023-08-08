@@ -4,7 +4,7 @@
 
 TFT_eSPI tft = TFT_eSPI();
 
-const int WIDTH = 160;
+const int WIDTH = 180;
 const int HEIGHT = 80;
 const int CELL_SIZE = 2;
 int grid[WIDTH / CELL_SIZE][HEIGHT / CELL_SIZE];
